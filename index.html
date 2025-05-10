@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letras para todos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ADD8E6; /* Color baby blue para todas las páginas */
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding-top: 90px; /* Espacio para el header fijo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        header {
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Para que se quede fijo */
+            top: 0;
+            left: 0;
+            z-index: 100; /* Asegura que esté por encima de otros elementos */
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #e0e0e0;
+        }
+
+        nav a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .marquesina-container {
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            text-align: center;
+            overflow: hidden;
+            position: fixed; /* Para que esté debajo del header fijo */
+            top: 52px; /* Ajustar según la altura del header */
+            left: 0;
+            z-index: 99; /* Para que esté debajo del header */
+        }
+
+        .marquesina {
+            white-space: nowrap;
+            animation: scroll 10s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .titulo-principal {
+            font-size: 4em;
+            font-style: italic;
+            color: white;
+            -webkit-text-stroke: 2px black;
+            text-stroke: 2px black;
+            margin-top: 50px; /* Ajustar el margen superior */
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .titulo-principal {
+                font-size: 3em;
+            }
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                width: 100%;
+                text-align: center;
+            }
+            .marquesina-container {
+                top: 92px; /* Ajustar para menú vertical */
+            }
+            body {
+                padding-top: 132px; /* Ajustar para menú vertical y marquesina */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .titulo-principal {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Estilos para la página de Nosotros */
+        .nosotros-contenido {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .nosotros-texto {
+            font-style: italic;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .nosotros-imagen {
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para la página de Contenidos */
+        .contenidos-secciones {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center; /* Centrar los botones */
+        }
+
+        .seccion-boton {
+            padding: 20px 40px; /* Botones más grandes */
+            background-color: #1E88E5; /* Azul Francia */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Bordes un poco más redondeados */
+            cursor: pointer;
+            font-size: 1.2em; /* Letra más grande */
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Un poco de sombra */
+        }
+
+        .seccion-boton:hover {
+            background-color: #1565C0; /* Azul un poco más oscuro al pasar el mouse */
+        }
+
+        .videos-container, .apoyo-container {
+            margin-top: 30px;
+            display: none; /* Oculto inicialmente */
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 900px;
+            padding: 20px;
+            background-color: #e0f7fa; /* Un tono claro para el fondo de las secciones */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .videos-columnas, .apoyo-columnas {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .video-embed {
+            width: 100%;
+            height: 315px;
+            border: 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .libro-enlace {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .libro-enlace:hover {
+            background-color: #ddd;
+        }
+
+        .columna {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contenidos">Contenidos</a>
+        </nav>
+    </header>
+
+    <div class="marquesina-container">
+        <div class="marquesina">
+            ¡Bienvenido a Letras para todos!
+        </div>
+    </div>
+
+    <section id="inicio" style="padding-top: 50px; text-align: center;">
+        <h1 class="titulo-principal">Letras<br>para todos</h1>
+    </section>
+
+    <section id="nosotros" style="padding-top: 80px; align-items: center; flex-direction: column;">
+        <div class="nosotros-contenido">
+            <p class="nosotros-texto">
+                <strong><em>Somos un sitio web que busca ayudar a las personas que no tuvieron la oportunidad de aprender a escribir o leer por medio de videos y posteriormente con libros que refuercen su aprendizaje. Nosotros buscamos apoyar el Objetivo de Desarrollo sustentable (ODS) 4: Educación de Calidad y buscamos apoyar a minorías que no tengan la posibilidad de adquirir los servicios necesarios o no tuvieron la oportunidad en su tiempo de aprender estas habilidades básicas para una vida digna y grandes oportunidades de trabajo.</em></strong>
+            </p>
+            <img src="https://th.bing.com/th/id/R.734b6e1f27114cac1519f2f9c728c391?rik=jzPibJpf6p5s8Q&riu=http%3a%2f%2fcde.3.elcomercio.pe%2fima%2f0%2f1%2f0%2f4%2f6%2f1046281.jpg&ehk=Avxl13iPT30mGlsQUR9Tsf8xTSfWfah7p%2fF6zLJ%2fxy4%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1" alt="Letras y Libros" class="nosotros-imagen">
+        </div>
+    </section>
+
+    <section id="contenidos" style="padding-top: 80px; align-items: center; flex-direction: column;">
+        <div class="contenidos-secciones">
+            <button class="seccion-boton" onclick="mostrarSeccion('videos')">Videos</button>
+            <button class="seccion-boton" onclick="mostrarSeccion('apoyo')">Contenido de Apoyo</button>
+        </div>
+
+        <div id="videos" class="videos-container">
+            <h2>Videos</h2>
+            <div class="videos-columnas">
+                <div class="columna">
+                    <h3>Para aprender a leer</h3>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/nmlre4H5iX4?si=aHg9vI0XGif7TMDV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/1wr_cdLEXIE?si=4J4Hxcwoqe1uCrmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/7AV9wUH7RF4?si=CY1TUZC_R2QLcSfn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="columna">
+                    <h3>Para aprender a escribir</h3>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/QFZqCAqR8QY?si=wv2tG6DaJUG69z67" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/nmlre4H5iX4?si=aHg9vI0XGif7TMDV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/1wr_cdLEXIE?si=4J4Hxcwoqe1uCrmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div id="apoyo" class="apoyo-container">
+            <h2>Contenido de Apoyo</h2>
+            <div class="apoyo-columnas">
+                <div class="columna">
+                    <h3>Libros para aprender a leer</h3>
+                    <a href="c:\Users\Admin\Downloads\Libro simple para el alfabetizador, Olinda Montenegro.pdf" class="libro-enlace" target="_blank">Libro para leer 1</a>
+                    <a href="c:\Users\Admin\Downloads\Alfabetizacion Inicial para jovenes y Adultos, Direccion General de Cultura y Educación.pdf" class="libro-enlace" target="_blank">Libro para leer 2</a>
+                </div>
+                <div class="columna">
+                    <h3>Libros para aprender a escribir</h3>
+                    <a href="c:\Users\Admin\Downloads\Cuadernillo de Escritura.pdf" class="libro-enlace" target="_blank">Libro para escribir 1</a>
+                    <a href="c:\Users\Admin\Downloads\Cuadernillo-de-Lectoescritura.pdf" class="libro-enlace" target="_blank">Libro para escribir 2</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquesina-container">
+        <div class="marquesina">
+            ¡Bienvenido a Letras para todos!
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').slice(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    console.warn(`Element with id "${targetId}" not found.  Navigating to home.`);
+                    window.location.href = "/";
+                }
+            });
+        });
+
+        function mostrarSeccion(id) {
+            const videos = document.getElementById('videos');
+            const apoyo = document.getElementById('apoyo');
+
+            if (id === 'videos') {
+                videos.style.display = 'flex';
+                apoyo.style.display = 'none';
+            } else if (id === 'apoyo') {
+                videos.style.display = 'none';
+                apoyo.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
